@@ -13,7 +13,12 @@ class ManageUsers extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->icon('heroicon-o-user-group')
+            Actions\CreateAction::make()->icon('heroicon-o-user-group')->action(function(array $data){
+                $user = $this->getModel()::create($data);
+                $user->assignRole('Parent');
+
+                return $user;
+            })
         ];
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "751196f215cf5bdf98e96e3ae0d61617",
+    "content-hash": "863a27aa700dec6643fcb7169e981aea",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -8102,6 +8102,64 @@
             "time": "2022-03-08T17:03:00+00:00"
         },
         {
+            "name": "webbingbrasil/filament-maps",
+            "version": "v3.0.0-beta.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webbingbrasil/filament-maps.git",
+                "reference": "6177e37bb80a20cd0098b68dac8892e419e27e64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webbingbrasil/filament-maps/zipball/6177e37bb80a20cd0098b68dac8892e419e27e64",
+                "reference": "6177e37bb80a20cd0098b68dac8892e419e27e64",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.13"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Webbingbrasil\\FilamentMaps\\FilamentMapsProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webbingbrasil\\FilamentMaps\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Danilo Andrade",
+                    "email": "danilo@webbingbrasil.com.br",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Map components for Filament.",
+            "homepage": "https://github.com/webbingbrasil/filament-maps",
+            "keywords": [
+                "filament",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/webbingbrasil/filament-maps/issues",
+                "source": "https://github.com/webbingbrasil/filament-maps/tree/v3.0.0-beta.1"
+            },
+            "time": "2024-03-13T20:14:19+00:00"
+        },
+        {
             "name": "webmozart/assert",
             "version": "1.11.0",
             "source": {
@@ -10598,7 +10656,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "webbingbrasil/filament-maps": 10
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

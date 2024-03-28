@@ -28,7 +28,7 @@ class UserResource extends Resource
             ->schema([
                 TextInput::make('name')->required(),
                 TextInput::make('email')->email()->required(),
-                Select::make('roles')->multiple()->relationship('roles', 'name'),
+                // Select::make('roles')->multiple()->relationship('roles', 'name'),
                 TextInput::make('password')->password()->required(),
                 TextInput::make('confirm_passowrd')->required()->password()
             ]);
@@ -40,6 +40,7 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('created_at')->date()->size('sm'),
                 TextColumn::make('name')->size('sm'),
+                TextColumn::make('email')->size('sm'),
                 TextColumn::make('password')->size('sm'),
                 TextColumn::make('role.name')->size('sm')
             ])
