@@ -33,7 +33,7 @@ class StudentResource extends Resource
                     TextInput::make('admission_number')->required(),
                     Select::make('parent_name')->options(Theparent::pluck('name','name'))->required(),
                     TextInput::make('class')->required(),
-                    TextInput::make('fingerprint_pattern')->required()
+                    TextInput::make('fingerprint_pattern')->required()->unique()
                 ])
             ]);
     }

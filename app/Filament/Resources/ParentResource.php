@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -31,7 +32,7 @@ class ParentResource extends Resource
             ->schema([
                 Fieldset::make()->schema([
                     TextInput::make('name')->required(),
-                    Select::make('zone')->options(Zone::pluck('bus_station','bus_station')),
+                    Select::make('zone')->options(Zone::pluck('bus_station', 'bus_station')),
                     TextInput::make('national_id')->required(),
                     TextInput::make('residence')->required(),
                     TextInput::make('phone_number')->required(),
@@ -55,8 +56,10 @@ class ParentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])->button()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
