@@ -3,18 +3,25 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Theparent;
 use App\Models\User;
+use App\Models\Driver;
+use App\Models\Student;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
 {
@@ -26,11 +33,16 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
+                Select::make('roles')->relationship('roles', 'name')->reactive(),
+                Select::make('name')->required()->options(function (Get $get) {
+                    if ($get('roles') != null) {
+                        $role = Role::find($get('roles'))->name;
+                        return  $role == 'Parent' ? Theparent::pluck('name', 'name') : Driver::pluck('name', 'name');
+                    }
+                }),
                 TextInput::make('email')->email()->required(),
-                // Select::make('roles')->multiple()->relationship('roles', 'name'),
-                TextInput::make('password')->password()->required(),
-                TextInput::make('confirm_passowrd')->required()->password()
+                TextInput::make('password')->password()->required()->confirmed(),
+                TextInput::make('password_confirmation')->required()->password()
             ]);
     }
 
@@ -43,6 +55,8 @@ class UserResource extends Resource
                 TextColumn::make('email')->size('sm'),
                 TextColumn::make('password')->size('sm'),
                 TextColumn::make('role.name')->size('sm')
+            ])->headerActions([
+                FilamentExportHeaderAction::make('Generate Report')->label('Generate Report')->color('gray')->outlined()->disableAdditionalColumns()->disableFilterColumns()
             ])
             ->filters([
                 //

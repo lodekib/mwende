@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ParentResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 use App\Filament\Resources\ParentResource\RelationManagers;
 use App\Models\Theparent;
 use Filament\Forms;
@@ -35,7 +36,7 @@ class ParentResource extends Resource
                     Select::make('zone')->options(Zone::pluck('bus_station', 'bus_station')),
                     TextInput::make('national_id')->required(),
                     TextInput::make('residence')->required(),
-                    TextInput::make('phone_number')->required(),
+                    TextInput::make('phone_number')->tel()->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')->unique(ignoreRecord: true)->required(),
                     TextInput::make('email')->required()->email(),
                 ])
             ]);
@@ -51,6 +52,8 @@ class ParentResource extends Resource
                 TextColumn::make('residence')->size('sm')->searchable()->sortable(),
                 TextColumn::make('email')->size('sm'),
                 TextColumn::make('phone_number')->size('sm')
+            ])->headerActions([
+                FilamentExportHeaderAction::make('Generate Report')->label('Generate Report')->color('gray')->outlined()->disableAdditionalColumns()->disableFilterColumns()
             ])
             ->filters([
                 //

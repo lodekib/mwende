@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ZoneResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 use App\Filament\Resources\ZoneResource\RelationManagers;
 use App\Models\Zone;
 use Filament\Forms;
@@ -40,6 +41,8 @@ class ZoneResource extends Resource
                 TextColumn::make('created_at')->date()->size('sm')->searchable(),
                 TextColumn::make('bus_station')->size('sm')->searchable(),
                 TextColumn::make('price')->size('sm')->searchable()->money('kes')
+            ])->headerActions([
+                FilamentExportHeaderAction::make('Generate Report')->label('Generate Report')->color('gray')->outlined()->disableAdditionalColumns()->disableFilterColumns()
             ])
             ->filters([
                 //

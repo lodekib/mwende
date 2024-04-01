@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DriverResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 use App\Filament\Resources\DriverResource\RelationManagers;
 use App\Models\Driver;
 use Filament\Forms;
@@ -28,9 +29,9 @@ class DriverResource extends Resource
             ->schema([
                 Fieldset::make()->schema([
                     TextInput::make('name')->required(),
-                    TextInput::make('national_id')->required(),
-                    TextInput::make('email')->required(),
-                    TextInput::make('phone_number')->required()
+                    TextInput::make('national_id')->required()->unique(),
+                    TextInput::make('email')->required()->unique(),
+                    TextInput::make('phone_number')->tel()->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')->unique(ignoreRecord: true)->required()
                 ])
             ]);
     }
@@ -44,6 +45,8 @@ class DriverResource extends Resource
                 TextColumn::make('national_id')->searchable()->sortable()->size('sm'),
                 TextColumn::make('email')->searchable()->sortable()->size('sm'),
                 TextColumn::make('phone_number')->searchable()->sortable()->size('sm')
+            ])->headerActions([
+                FilamentExportHeaderAction::make('Generate Report')->label('Generate Report')->color('gray')->outlined()->disableAdditionalColumns()->disableFilterColumns()
             ])
             ->filters([
                 //

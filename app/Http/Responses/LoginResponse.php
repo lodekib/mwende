@@ -15,8 +15,10 @@ class LoginResponse extends \Filament\Http\Responses\Auth\LoginResponse
         $user = Auth::user();
         if ($user->hasRole('Parent')) {
             return redirect()->route('filament.parent.pages.dashboard');
-        } else {
-            return redirect()->route('filament.admin.pages.dashboard');
+        } else if($user->hasRole('Driver')) {
+            return redirect()->route('filament.driver.pages.dashboard');
+        }else{
+            return redirect()->route('filament.admin.pages.dashborad');
         }
 
         return parent::toResponse($request);

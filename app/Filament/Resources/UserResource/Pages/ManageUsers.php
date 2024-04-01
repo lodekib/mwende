@@ -15,7 +15,7 @@ class ManageUsers extends ManageRecords
         return [
             Actions\CreateAction::make()->icon('heroicon-o-user-group')->action(function(array $data){
                 $user = $this->getModel()::create($data);
-                $user->assignRole('Parent');
+                // $user->assignRole($data['roles']);
 
                 return $user;
             })

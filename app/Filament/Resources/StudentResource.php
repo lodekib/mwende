@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
@@ -47,6 +48,8 @@ class StudentResource extends Resource
                 TextColumn::make('admission_number')->size('sm')->searchable()->sortable(),
                 TextColumn::make('class')->size('sm')->badge(),
                 TextColumn::make('fingerprint_pattern')->size('sm')
+            ])->headerActions([
+                FilamentExportHeaderAction::make('Generate Report')->label('Generate Report')->color('gray')->outlined()->disableAdditionalColumns()->disableFilterColumns()
             ])
             ->filters([
                 //

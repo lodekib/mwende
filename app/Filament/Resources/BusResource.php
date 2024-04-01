@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BusResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 use App\Filament\Resources\BusResource\RelationManagers;
 use App\Models\Bus;
 use App\Models\Driver;
@@ -51,6 +52,8 @@ class BusResource extends Resource
                 TextColumn::make('route')->badge(),
                 TextColumn::make('capacity')->size('sm'),
                 
+            ])->headerActions([
+                FilamentExportHeaderAction::make('Generate Report')->label('Generate Report')->color('gray')->outlined()->disableAdditionalColumns()->disableFilterColumns()
             ])
             ->filters([
                 //

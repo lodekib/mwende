@@ -30,7 +30,7 @@ class Children extends Page implements HasForms,HasTable
         return $table->query(Student::where('parent_id',$this->parent_id))->columns([
             TextColumn::make('created_at')->date()->size('sm'),
             TextColumn::make('name')->size('sm'),
-            TextColumn::make('fingerprint_pattern')->size('sm')->formatStateUsing(fn ($state) => Str::mask($state, '*', 2)),
+            // TextColumn::make('fingerprint_pattern')->size('sm')->formatStateUsing(fn ($state) => Str::mask($state, '*', 2)),
             TextColumn::make('class')->size('sm')->searchable()->sortable(),
         ]);
     }
